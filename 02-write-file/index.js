@@ -8,18 +8,18 @@ const {
 const rl = readline.createInterface({ input, output });
 const writeableStream = fs.createWriteStream(path.join(__dirname, 'text.txt'));
 
-console.log('Привет! Введите ваше сообщение или нажмите "ctrl+c" для выхода');
+console.log('Привет! Введите ваше сообщение или нажмите "exit" для выхода');
 
 rl.on('line', data =>{
+  if(data.toLowerCase() === 'exit'){
+    console.log('До новых встреч!')
+    process.exit();
+  }
     writeableStream.write(data + '\n');
-});
-
-rl.on('SIGINT', () => {
-  process.emit('SIGINT');
 });
 
 process.on('SIGINT', () =>{
   writeableStream.end();
-  console.log('До новых встреч');
+  console.log('До новых встреч!');
   process.exit();
 })
