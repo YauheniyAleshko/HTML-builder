@@ -6,10 +6,9 @@ const {
     stdout: output,
 } = require('node:process');
 const rl = readline.createInterface({ input, output });
-const filePath = path.join(__dirname, 'text.txt');
-const writeableStream = fs.createWriteStream(filePath);
+const writeableStream = fs.createWriteStream(path.join(__dirname, 'text.txt'));
 
-console.log('Добро пожаловать! Введите ваше сообщение или нажмите "ctrl+c" для выхода');
+console.log('Привет! Введите ваше сообщение или нажмите "ctrl+c" для выхода');
 
 rl.on('line', data =>{
     writeableStream.write(data + '\n');
@@ -23,5 +22,4 @@ process.on('SIGINT', () =>{
   writeableStream.end();
   console.log('До новых встреч');
   process.exit();
-  
 })
